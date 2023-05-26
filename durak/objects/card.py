@@ -164,7 +164,7 @@ STICKERS = {
 
 class Card:
     """ This is Card :> """
-    
+
     def __init__(self, value: Values, suit: Suits) -> None:
         self.value: Values = value
         self.suit: Suits = suit
