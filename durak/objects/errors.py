@@ -1,0 +1,2 @@
+class DeckEmptyError(Exception):
+    pass
