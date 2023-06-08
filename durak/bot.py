@@ -303,7 +303,7 @@ async def start_handler(message: types.Message):
         await message.answer(f'Игра началась!\n\nКозырь - {game.deck.trump_ico}')
 
         current = game.current_player
-        await message.answer(f'({current.user.get_mention(as_html=True)}) - Ваш ход!', reply_markup=types.InlineKeyboardMarkup(CHOISE))
+        await message.answer(f'({current.user.get_mention(as_html=True)}) - Ваш ход!', reply_markup=types.InlineKeyboardMarkup(inline_keyboard=CHOISE))
 
 
 
