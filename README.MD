@@ -25,5 +25,6 @@ _______
 
 При последующих запусках:
 ```
+> venv\Scripts\activate
 > python durak\bot.py
 ```
