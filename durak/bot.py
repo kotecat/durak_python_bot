@@ -421,6 +421,7 @@ async def result_handler(query: types.ChosenInlineResult):
         except:
             return
         else:
+            # opponent.anti_cheat += 1
             await actions.do_attack_card(player, atk_card)
 
     elif len(split_result_id) == 2:  # DEF
@@ -430,6 +431,7 @@ async def result_handler(query: types.ChosenInlineResult):
         except:
             return
         else:
+            # current.anti_cheat += 1
             await actions.do_defence_card(player, atk_card, def_card)
     
     else:

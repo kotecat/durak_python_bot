@@ -45,7 +45,8 @@ def add_draw(player: Player, results: List[InlineQueryResult]):
         Sticker(
             id="draw", sticker_file_id=c.STICKERS['draw'],
             input_message_content=
-            InputTextMessageContent(f'Взял(а) {n} 🃏')
+            # InputTextMessageContent(f'Взял(а) {n} 🃏')
+            InputTextMessageContent("Взял(а) карты!")
         )
     )
 
