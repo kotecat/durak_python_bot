@@ -1,4 +1,4 @@
-from enum import StrEnum, Enum
+from enum import StrEnum
 
 
 class Suits(StrEnum):
@@ -170,7 +170,21 @@ class Card:
         self.suit: Suits = suit
 
     def __str__(self) -> str:
-        return self.__repr__()
+        value = self.value
+        if value == Values.JACK:
+            value = 'J'
+        elif value == Values.QUEEN:
+            value = 'Q'
+        elif value == Values.KING:
+            value = 'K'
+        elif value == Values.ACE:
+            value = 'A'
+
+        suit = self.suit 
+        value_to_key = {member.value: member.name for member in Suits}
+        suit = SuitsIcons.__members__.get(value_to_key.get(suit))
+
+        return f'{value} {suit}'
     
     def __repr__(self) -> str:
         return f"{self.value}_{self.suit}"
@@ -181,7 +195,23 @@ class Card:
     def __lt__(self, other) -> bool:
         return repr(self) > repr(other)
     
+    def __hash__(self) -> int:
+        return hash(self.__repr__())
+    
 
 def from_str(string: str):
-    value, suit = string.split('_')
+    value, suit = list(map(lambda s: s.lower(), string.split('_')))
+    if value == 'j':
+        value = Values.JACK
+    elif value == 'q':
+        value = Values.QUEEN
+    elif value == 'k':
+        value = Values.KING
+    elif value == 'a':
+        value = Values.ACE
+
+    if suit not in Suits.__members__.values():
+        value_to_key = {member.value: member.name for member in SuitsIcons}
+        suit = Suits.__members__.get(value_to_key.get(suit))
+
     return Card(value, suit)
