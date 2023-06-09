@@ -340,7 +340,7 @@ async def inline_handler(query: types.InlineQuery):
                 
             elif player == game.opponent_player:
                 # player is DEF
-                if game.field:
+                if game.field and not game.all_beaten_cards:
                     r.add_draw(player, result)
                 try:
                     card = c.from_str(text)
