@@ -2,12 +2,11 @@
 
 cd /d "%~dp0"
 
-IF EXIST "venv" (
-    venv\Scripts\python.exe durak\bot.py
-) ELSE (
+IF NOT EXIST "venv" (
     python -m pip install virtualenv
+    echo "creating venv dir..."
     python -m venv venv
-    echo "please wait"
+    echo "install all requirements..."
     venv\Scripts\python.exe -m pip install -r requirements.txt
 )
 
