@@ -1,7 +1,6 @@
 from objects import *
 
 from aiogram import types, Bot
-from pprint import pprint
 from typing import Dict, List, Union
 
 

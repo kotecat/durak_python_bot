@@ -1,8 +1,9 @@
 from objects import *
 from loader import gm, bot, dp, Config
-from utils import user_is_bot_admin, user_is_creator, user_is_creator_or_admin
-import actions
-import result as r
+from logic.utils import user_is_bot_admin, user_is_creator, user_is_creator_or_admin
+
+from logic import actions
+from logic import result as r
 
 from typing import List
 from aiogram import Bot, types, executor
