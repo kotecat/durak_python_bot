@@ -1,6 +1,7 @@
 from dataclasses import dataclass
+from enum import StrEnum
 from environs import Env
-from typing import List, ClassVar
+from typing import List, Tuple, Dict, ClassVar
 
 
 env = Env()
@@ -20,3 +21,30 @@ class Config:
     MAX_PLAYERS: int = 6
     COUNT_CARDS_IN_START: int = 6
     DEFAULT_GAMEMODE = "true_none"  # :>
+    
+
+class Commands(StrEnum):
+    NEW: str = 'new'
+    JOIN: str = 'join'
+    START: str = 'run'
+    LEAVE: str = 'leave'
+    GLEAVE: str = 'gleave'
+    KICK: str = 'kick'
+    KILL: str = 'kill'
+    HELP: str = 'help'
+    STATS: str = 'stats'
+    SOURCE: str = 'source'
+    
+
+COMMANDS: List = [
+    (Commands.NEW, 'Создать новую игру'),
+    (Commands.JOIN, 'Присоедениться к игре'),
+    (Commands.START, 'Запустить игру'),
+    (Commands.LEAVE, 'Покинуть игру или лобби'),
+    (Commands.GLEAVE, 'Покинуть игру во всех чатах'),
+    (Commands.KICK, 'Выгнать игрока'),
+    (Commands.KILL, 'Завершить игру'),
+    (Commands.HELP, 'Помощь по боту'),
+    (Commands.STATS, 'Ваша статистика'),
+    (Commands.SOURCE, 'Исходный код')
+]

@@ -1,9 +1,9 @@
 from aiogram import types
-from loader import bot, dp, gm
+from loader import bot, dp, gm, Commands
 from objects import *
 
 
-@dp.message_handler(commands=['leave'], chat_type=['group', 'supergroup'])
+@dp.message_handler(commands=[Commands.LEAVE], chat_type=['group', 'supergroup'])
 async def leave_handler(message: types.Message):
     ''' Leave in a game '''
     user = types.User.get_current()

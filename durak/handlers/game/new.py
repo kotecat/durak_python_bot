@@ -1,9 +1,9 @@
 from aiogram import types
-from loader import bot, dp, gm
+from loader import bot, dp, gm, Commands
 from objects import *
 
 
-@dp.message_handler(commands=['new'], chat_type=['group', 'supergroup'])
+@dp.message_handler(commands=[Commands.NEW], chat_type=['group', 'supergroup'])
 async def new_handler(message: types.Message):
     ''' Creating new game '''
     user = types.User.get_current()

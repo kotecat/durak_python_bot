@@ -1,9 +1,15 @@
 from aiogram import types
-from loader import bot, dp, gm, CHOISE
+from loader import bot, dp, gm, CHOISE, Commands
 from objects import *
+from logic.utils import (
+    user_is_admin,
+    user_is_creator,
+    user_is_bot_admin,
+    user_is_creator_or_admin
+)
 
 
-@dp.message_handler(commands=['start'], chat_type=['group', 'supergroup'])
+@dp.message_handler(commands=[Commands.START], chat_type=['group', 'supergroup'])
 async def start_handler(message: types.Message):
     ''' Start a game '''
     user = types.User.get_current()
@@ -15,6 +21,8 @@ async def start_handler(message: types.Message):
         await message.answer('В этом чате нет игры!!\nСоздайте её при помощи - /new')
         return
     
+    if not (await user_is_creator_or_admin(user, game, chat)):
+        await message.answer('Вы не можете начать игру!')
     try:
         # game start
         gm.start_game(game)

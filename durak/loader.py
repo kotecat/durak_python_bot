@@ -1,5 +1,5 @@
 from logic.game_manager import GameManager
-from config import Config
+from config import Config, COMMANDS, Commands
 from aiogram import types, Bot, Dispatcher
 
 

@@ -1,9 +1,9 @@
 from aiogram import types
-from loader import bot, dp, gm, Config
+from loader import bot, dp, gm, Config, Commands
 from objects import *
 
 
-@dp.message_handler(commands=['join'], chat_type=['group', 'supergroup'])
+@dp.message_handler(commands=[Commands.JOIN], chat_type=['group', 'supergroup'])
 async def join_handler(message: types.Message):
     ''' Join in a game '''
     user = types.User.get_current()

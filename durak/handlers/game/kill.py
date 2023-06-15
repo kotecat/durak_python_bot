@@ -1,5 +1,5 @@
 from aiogram import types
-from loader import bot, dp, gm
+from loader import bot, dp, gm, Commands
 from objects import *
 from logic.utils import (
     user_is_admin,
@@ -9,7 +9,7 @@ from logic.utils import (
 )
 
 
-@dp.message_handler(commands=['kill'], chat_type=['group', 'supergroup'])
+@dp.message_handler(commands=[Commands.KILL], chat_type=['group', 'supergroup'])
 async def start_handler(message: types.Message):
     ''' Kill a game '''
     user = types.User.get_current()
