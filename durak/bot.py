@@ -7,7 +7,7 @@ import handlers
 logging.basicConfig(level=logging.INFO)
 
 
-async def on_startup(dp):
+async def on_startup(*args):
     print("bot started!")
     
     commands = []

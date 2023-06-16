@@ -21,7 +21,7 @@ class Config:
     MAX_PLAYERS: int = 6
     COUNT_CARDS_IN_START: int = 6
     DEFAULT_GAMEMODE: str = "true_none"  # :> .......
-    DEBUG: bool = True
+    DEBUG: bool = False
     
 
 class Commands(StrEnum):
@@ -37,7 +37,7 @@ class Commands(StrEnum):
     SOURCE: str = 'source'
     
 
-COMMANDS: List = [
+COMMANDS: List[Tuple[str, str]] = [
     (Commands.NEW, 'Создать новую игру'),
     (Commands.JOIN, 'Присоедениться к игре'),
     (Commands.START, 'Запустить игру'),
