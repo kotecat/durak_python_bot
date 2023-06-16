@@ -1,5 +1,6 @@
 from aiogram import types
 from loader import bot, dp, gm, Commands
+import logic.actions as a
 from objects import *
 
 
@@ -23,7 +24,7 @@ async def leave_handler(message: types.Message):
     
     try:
         # kick player
-        await gm.leave_player(player)
+        await a.do_leave_player(player)
     except NotEnoughPlayersError:
         gm.end_game(chat)
         await message.answer('Игра завершена!')

@@ -20,7 +20,8 @@ class Config:
     WAITING_TIME: int = 120
     MAX_PLAYERS: int = 6
     COUNT_CARDS_IN_START: int = 6
-    DEFAULT_GAMEMODE = "true_none"  # :>
+    DEFAULT_GAMEMODE: str = "true_none"  # :> .......
+    DEBUG: bool = True
     
 
 class Commands(StrEnum):

@@ -23,6 +23,7 @@ async def start_handler(message: types.Message):
     
     if not (await user_is_creator_or_admin(user, game, chat)):
         await message.answer('Вы не можете начать игру!')
+        return
     try:
         # game start
         gm.start_game(game)

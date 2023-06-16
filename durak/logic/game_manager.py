@@ -83,68 +83,6 @@ class GameManager:
         game.players.append(player)
 
         return
-    
-
-    async def do_turn(self, game: Game, skip_def: bool = False):
-        """errors:
-        ...
-        """
-        game.turn(skip_def=skip_def)
-        chat = game.chat
-        bot = Bot.get_current()
-
-        for pl in game.players:
-            if pl.cards:
-                continue
-            # Win ▼
-            if not game.winner:
-                # First
-                game.winner = pl
-                await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Первый победитель!')
-            else:
-                await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Побеждает!')
-
-            try:
-                await self.leave_player(pl)
-            except NotEnoughPlayersError:
-                self.end_game(game.chat)
-
-            try:
-                game = self.get_game_from_chat(chat)
-            except NoGameInChatError:
-                await bot.send_message(chat.id, 'Игра завершена!')
-
-    
-
-    async def leave_player(self, player: Player):
-        """errors:
-
-        - NotEnoughPlayersError
-        """
-        game = player.game
-
-        if not game.started:
-            game.players.remove(player)
-            return
-        
-        index = game.players.index(player)
-
-        current = game.current_player
-        opponent = game.opponent_player
-        attacker_id = game.attacker_index
-
-        if player in [current, opponent]:
-            game._clear_field()
-
-        game.players.remove(player)
-        if not (player in [current, opponent] or index > attacker_id+1):
-            game.attacker_index = (game.attacker_index + 1) % len(game.players)
-
-        if len(game.players) <= 1:
-            raise NotEnoughPlayersError
-        
-        if player in [current, opponent]:
-            await self.do_turn(game)
         
 
     def start_game(self, game: Game) -> None:

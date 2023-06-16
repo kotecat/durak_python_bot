@@ -59,3 +59,5 @@ class Deck:
 
         self.shuffle()
         self._set_trump()
+        
+        self.cards = self.cards[:8]

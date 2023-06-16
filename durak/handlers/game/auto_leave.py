@@ -1,5 +1,6 @@
 from aiogram import types
 from loader import bot, dp, gm
+import logic.actions as a
 from objects import *
 
 
@@ -28,7 +29,7 @@ async def auto_leave_handler(message: types.Message):
 
     try:
         # kick player
-        await gm.leave_player(player)
+        await a.do_leave_player(player)
     except NotEnoughPlayersError:
         gm.end_game(chat)
         await bot.send_message(chat.id, f'({mention}) - Покинул игру!')
