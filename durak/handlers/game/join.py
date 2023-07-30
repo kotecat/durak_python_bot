@@ -5,10 +5,12 @@ from objects import *
 
 @dp.message_handler(commands=[Commands.JOIN], chat_type=['group', 'supergroup'])
 async def join_handler(message: types.Message):
-    ''' Join in a game '''
+    """ Join in a game """
     user = types.User.get_current()
     chat = types.Chat.get_current()
 
+    
+    
     try:
         game = gm.get_game_from_chat(chat)
     except NoGameInChatError:

@@ -34,6 +34,8 @@ class Commands(StrEnum):
     KILL: str = 'kill'
     HELP: str = 'help'
     STATS: str = 'stats'
+    OFF_STATS: str = 'off_stats'
+    ON_STATS: str = 'on_stats'
     SOURCE: str = 'source'
     
 
@@ -47,5 +49,7 @@ COMMANDS: List[Tuple[str, str]] = [
     (Commands.KILL, 'Завершить игру'),
     (Commands.HELP, 'Помощь по боту'),
     (Commands.STATS, 'Ваша статистика'),
+    (Commands.OFF_STATS, 'Выключить статистику'),
+    (Commands.ON_STATS, 'Включить статистику'),
     (Commands.SOURCE, 'Исходный код')
 ]

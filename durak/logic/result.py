@@ -5,7 +5,7 @@ from aiogram.types import InlineQueryResultArticle, InlineQueryResult, \
                     InlineKeyboardMarkup
 from typing import List
 from uuid import uuid4
-
+from config import Commands
 
 from objects import Player, Game, Card, card as c
 
@@ -15,11 +15,11 @@ def add_no_game(results: List[InlineQueryResult]):
     results.append(
         InlineQueryResultArticle(
             id="nogame",
-            title = "You are not playing",
+            title = "Вы не играете",
             input_message_content=
-            InputTextMessageContent('Not playing right now. Use /new to '
-                                      'start a game or /join to join the '
-                                      'current game in this group')
+            InputTextMessageContent('Вы сейчас не играете. Используйте /new чтобы '
+                                    'начать игру или /join, чтобы присоединиться к игре '
+                                    'текущая игра в этой группе')
         )
     )
 
@@ -29,9 +29,9 @@ def add_not_started(results: List[InlineQueryResult]):
     results.append(
         InlineQueryResultArticle(
             id="nogame",
-            title = "The game wasn't started yet",
+            title = "Игра еще не началась",
             input_message_content=
-            InputTextMessageContent('Start the game with /start')
+            InputTextMessageContent(f'Запустить игру /{Commands.START}')
         )
     )
 
