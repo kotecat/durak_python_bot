@@ -57,7 +57,7 @@ class Deck:
             for suit in c.Suits:
                 self.cards.append(Card(value.value, suit.value))
 
-        self.shuffle()
+        # self.shuffle()
         self._set_trump()
         
-        # self.cards = self.cards[:8]
+        # self.cards = self.cards[:8]  # for test

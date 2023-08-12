@@ -27,21 +27,10 @@ async def do_turn(game: Game, skip_def: bool = False):
 
                 if us.stats:
                     us.first_places += 1  # first winner
-                    us.games_played += 1
                 
             game.winner = pl
             await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Первый победитель!')
-        else:
-            # stats
-            with session as s:
-                user = pl.user
-                us = UserSetting.get(id=user.id)
-                if not us:
-                    us = UserSetting(id=user.id)
-
-                if us.stats:
-                    us.games_played += 1
-                    
+        else:    
             await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Побеждает!')
 
         try:
@@ -65,6 +54,19 @@ async def do_leave_player(player: Player):
     if not game.started:
         game.players.remove(player)
         return
+    
+    try:
+        # stats
+        with session as s:
+            user = player.user
+            us = UserSetting.get(id=user.id)
+            if not us:
+                us = UserSetting(id=user.id)
+
+            if us.stats:
+                us.games_played += 1
+    except Exception as e:
+        print(f"[actions] [stat_leave_+] [Error]: {e}")
     
     index = game.players.index(player)
 
@@ -113,7 +115,7 @@ async def do_attack_card(player: Player, card: Card):
         if us.stats:
             us.cards_played += 1
             us.cards_atack += 1
-
+    
     if (not player.cards) or not (game.allow_atack):
         """ Auto Pass """
         game.is_pass = True

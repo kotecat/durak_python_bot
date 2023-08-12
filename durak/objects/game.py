@@ -23,7 +23,7 @@ class Game:
         self.started: bool = False
         self.creator: types.User = creator
         self.open: bool = True
-        self.mode: str = Config.DEFAULT_GAMEMODE  # "{is_text}_{mode}"
+        self.mode: str = Config.DEFAULT_GAMEMODE  # "p"
 
         self.attacker_index: int = 0
         self.winner: Player | None = None
@@ -77,11 +77,16 @@ class Game:
     def opponent_player(self) -> Player:
         return self.players[(self.attacker_index + 1) % len(self.players)]
     
+    
+    @property
+    def support_player(self) -> Player:
+        return self.players[(self.attacker_index + 2) % len(self.players)]
+    
 
     @property
     def allow_atack(self) -> bool:
         return len(self.attacking_cards) < self.COUNT_CARDS_IN_START and \
-            len(self.defending_cards)+len(self.current_player.cards) > len(self.attacking_cards)
+            len(self.defending_cards)+len(self.opponent_player.cards) > len(self.attacking_cards)
     
     
     def attack(self, card: Card) -> None:
@@ -125,4 +130,3 @@ class Game:
         self._clear_field()
         self.take_cards_from_deck()  # every player add cards to hand
         self.current_player.turn_started = datetime.now()
-        

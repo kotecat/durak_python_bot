@@ -1,4 +1,5 @@
 from objects import *
+from db import UserSetting, session
 
 from aiogram import types, Bot
 from typing import Dict, List, Union
@@ -42,18 +43,35 @@ class GameManager:
         - NoGameInChatError
         """
         if isinstance(target, types.Chat):
-            game = self.games.get(target.id, None)
-            if game is not None:
-                del self.games[target.id]
-                return
-            raise NoGameInChatError
-
+            chat = target
         else:
-            for chat_id, game_ in self.games.items():
-                if target == game_:
-                    del self.games[chat_id]
-                    return
-            raise NoGameInChatError
+            chat = target.chat
+        
+        game = self.games.get(target.id, None)
+        if game is not None:
+            players = game.players
+            
+            for pl in players:
+                # stats
+                with session as s:
+                    user = pl.user
+                    us = UserSetting.get(id=user.id)
+                    if not us:
+                        us = UserSetting(id=user.id)
+
+                    if us.stats:
+                        us.games_played += 1
+            
+            del self.games[target.id]
+            return
+        raise NoGameInChatError
+
+        # else:
+        #     for chat_id, game_ in self.games.items():
+        #         if target == game_:
+        #             del self.games[chat_id]
+        #             return
+        #     raise NoGameInChatError
         
 
     def join_in_game(self, game: Game, user: types.User) -> None:

@@ -5,6 +5,15 @@ from objects import *
 from logic import actions
 
 
+async def send_cheat_att(player: Player):
+    chat = player.game.chat
+    user = player.user
+    await bot.send_message(
+            chat.id,
+            text = f"Попытка считерить {user.get_mention(as_html=True)}"
+        )
+
+
 @dp.chosen_inline_handler()
 async def result_handler(query: types.ChosenInlineResult):
     ''' Inline process '''
@@ -42,10 +51,7 @@ async def result_handler(query: types.ChosenInlineResult):
     
     elif int(anti_cheat) != last_anti_cheat:
         # cheat attempt
-        await bot.send_message(
-            chat.id,
-            text = f"Попытка считерить {player.user.get_mention(as_html=True)}"
-        )
+        await send_cheat_att(player)
         return
     
     elif result_id == 'draw':
@@ -61,7 +67,11 @@ async def result_handler(query: types.ChosenInlineResult):
             return
         else:
             # opponent.anti_cheat += 1
-            await actions.do_attack_card(player, atk_card)
+            if game.allow_atack:
+                await actions.do_attack_card(player, atk_card)
+            else:
+                await send_cheat_att(player)
+                return
 
     elif len(split_result_id) == 2:  # DEF
         try:

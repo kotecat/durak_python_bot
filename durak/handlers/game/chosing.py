@@ -27,7 +27,7 @@ async def inline_handler(query: types.InlineQuery):
         
             playable = []  # playable cards 
 
-            if player == game.current_player:
+            if player in {game.current_player}:
                 # player is ATK
                 if not game.is_pass:
                     r.add_pass(result, game)
