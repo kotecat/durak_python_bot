@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from enum import StrEnum
+from enum import Enum
 from environs import Env
 from typing import List, Tuple, Dict, ClassVar
 
@@ -24,7 +24,7 @@ class Config:
     DEBUG: bool = False
     
 
-class Commands(StrEnum):
+class Commands(Enum):
     NEW: str = 'new'
     JOIN: str = 'join'
     START: str = 'run'
