@@ -1,7 +1,7 @@
 git pull
 
-if ! [ -f /venv/ ]; then
-    echo -e "\e[32Red CREATE VENV"
+if ! [ -d /venv/ ]; then
+    echo "CREATE VENV"
     python3 -m pip install virtualenv
     echo "creating venv dir..."
     python3 -m venv venv
@@ -10,7 +10,7 @@ if ! [ -f /venv/ ]; then
     python3 -m pip install -r requirements.txt
 fi
 
-echo -e "\e[32Green running..."
+echo "running..."
 
 source venv/bin/activate
 
