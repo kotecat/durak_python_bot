@@ -1,6 +1,6 @@
 git pull
 
-if ! [ -f venv ]; then
+if ! [ -f /venv ]; then
     python3 -m pip install virtualenv
     echo "creating venv dir..."
     python3 -m venv venv
