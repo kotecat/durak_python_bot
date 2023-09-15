@@ -24,7 +24,7 @@ class Config:
     DEBUG: bool = False
     
 
-class Commands(Enum):
+class Commands:
     NEW: str = 'new'
     JOIN: str = 'join'
     START: str = 'run'
