@@ -193,7 +193,9 @@ class Card:
         return repr(self) == repr(other)
     
     def __lt__(self, other) -> bool:
-        return repr(self) > repr(other)
+        if not isinstance(other, Card):
+            raise ValueError(f"{other} is not card. Cannot sorting.")
+        return repr(self) < repr(other)
     
     def __hash__(self) -> int:
         return hash(self.__repr__())

@@ -3,8 +3,9 @@ from textwrap import dedent
 from loader import bot, dp, Commands
 
 
+
 @dp.message_handler(commands=[Commands.SOURCE])
-async def help_handler(message: types.Message):
+async def source_handler(message: types.Message):
     source = dedent("""Этот бот является копией бесплатного программного обеспечения. И находится под лицензией "<b>AGPL</b>".
 <b>Оригинальный код доступен здесь:</b>
 https://github.com/kotecat/durak_python_bot
@@ -17,6 +18,7 @@ https://github.com/kotecat/durak_python_bot
 Иконки, отредактированные <b>ɳick</b>"
 
 Разработка бота: <a href='tg://user?id=1956508438'>MrKoteyka</a>
-Отдельная благодарность: <a href='tg://user?id=943441135'>Dimoka113</a>""")
+Отдельная благодарность: <a href='tg://user?id=943441135'>Dimoka113</a>
+Отдельная отдельная благодарность: <a href="tg://user?id=1984752299">😱🐮🎳MilkyRoxxx</a>""")
     
     await message.answer(source, disable_web_page_preview=True)
