@@ -20,13 +20,6 @@ gm = GameManager()
 CHOISE = [[types.InlineKeyboardButton(text='Выбери карту!', switch_inline_query_current_chat='')]]
 
 
-# SUPPRESSER
-async def send_messsge(*a, **kw) -> str:
-    with suppress(BadRequest):
-        return await bot.send_message(*a, **kw)
-    
-    
 # BOT & DP
 bot = Bot(Config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
-bot.send_message = send_messsge
 dp = Dispatcher(bot)

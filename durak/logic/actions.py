@@ -4,6 +4,27 @@ from db import UserSetting, session
 from aiogram import types, Bot
 
 
+async def win(game: Game, player: Player):
+    chat = game.chat
+    bot = Bot.get_current()
+
+    if not game.winner:
+        # First
+        # satistic
+        with session as s:
+            user = player.user
+            us = UserSetting.get(id=user.id)
+            if not us:
+                us = UserSetting(id=user.id)
+            if us.stats:
+                us.first_places += 1  # first winner
+            
+        game.winner = player
+        await bot.send_message(chat.id, f'({player.user.get_mention(as_html=True)}) - Первый победитель!')
+    else:    
+        await bot.send_message(chat.id, f'({player.user.get_mention(as_html=True)}) - Побеждает!')
+
+
 async def do_turn(game: Game, skip_def: bool = False):
     """errors:
     ...
@@ -17,22 +38,7 @@ async def do_turn(game: Game, skip_def: bool = False):
             continue
         # Win ▼
         if not game.is_final:
-            if not game.winner:
-                # First
-                # satistic
-                with session as s:
-                    user = pl.user
-                    us = UserSetting.get(id=user.id)
-                    if not us:
-                        us = UserSetting(id=user.id)
-
-                    if us.stats:
-                        us.first_places += 1  # first winner
-                    
-                game.winner = pl
-                await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Первый победитель!')
-            else:    
-                await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Побеждает!')
+            await win(game, pl)
 
             try:
                 await do_leave_player(pl)
@@ -44,9 +50,14 @@ async def do_turn(game: Game, skip_def: bool = False):
             except NoGameInChatError:
                 await bot.send_message(chat.id, 'Игра завершена!')
         else:
-            gm.end_game(game.chat)
-            await bot.send_message(chat.id, "Произошла ничья :>")
+            if not game.opponent_player.cards:
+                gm.end_game(game.chat)
+                await bot.send_message(chat.id, "Произошла ничья :>")
+            else:
+                await win(game, game.current_player)
             await bot.send_message(chat.id, 'Игра завершена!')
+            return
+            
 
     
 async def do_leave_player(player: Player):

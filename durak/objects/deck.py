@@ -60,4 +60,4 @@ class Deck:
         self.shuffle()
         self._set_trump()
         
-        # self.cards = self.cards[:8]  # for test
+        # self.cards = self.cards[:2]  # for test

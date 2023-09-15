@@ -32,7 +32,7 @@ async def inline_handler(query: types.InlineQuery):
                 if not game.is_pass:
                     r.add_pass(result, game)
                 playable = player.playable_card_atk()
-                playable.sort()
+                playable.sort(key=lambda card: repr(card))
 
                 for card_ in player.cards:
                     r.add_card(game, card_, result, (card_ in playable))
@@ -50,7 +50,7 @@ async def inline_handler(query: types.InlineQuery):
                     if card in game.attacking_cards:
                         if game.field.get(card) is None:
                             playable = player.playable_card_def(c.from_str(text))
-                            playable.sort()
+                            playable.sort(key=lambda card: repr(card))
 
                     for card_ in player.cards:
                         r.add_card(game, card, result, (card_ in playable), card_)
