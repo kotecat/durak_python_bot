@@ -14,7 +14,7 @@ async def join_handler(message: types.Message):
     try:
         game = gm.get_game_from_chat(chat)
     except NoGameInChatError:
-        await message.answer('В этом чате нет игры!!\nСоздайте её при помощи - /new')
+        await message.answer(f'В этом чате нет игры!!\nСоздайте её при помощи - /{Commands.NEW}')
         return
     
     try:
@@ -23,11 +23,11 @@ async def join_handler(message: types.Message):
     except GameStartedError:
         await message.answer('Игра уже запущена! Вы не можете присоединиться!')
     except LobbyClosedError:
-        await message.answer('Лобби закрыто!\nОткрыть - /open')
+        await message.answer('Лобби закрыто!\nОткрыть - /open')  # ignore
     except LimitPlayersInGameError:
         await message.answer(f'Достигнут лимит в {Config.MAX_PLAYERS} игроков!')
     except AlreadyJoinedInGlobalError:
-        await message.answer('Похоже вы играете в другом чате!\nПокинуть эту игру - /gleave')
+        await message.answer(f'Похоже вы играете в другом чате!\nПокинуть эту игру - /{Commands.GLEAVE}')
     except AlreadyJoinedError:
         await message.answer('В игре ты!')
         

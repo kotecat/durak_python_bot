@@ -13,7 +13,7 @@ async def leave_handler(message: types.Message):
     try:
         game = gm.get_game_from_chat(chat)
     except NoGameInChatError:
-        await message.answer('В этом чате нет игры!!\nСоздайте её при помощи - /new')
+        await message.answer(f'В этом чате нет игры!!\nСоздайте её при помощи - /{Commands.NEW}')
         return
     
     player = gm.player_for_user(user)

@@ -16,4 +16,4 @@ async def new_handler(message: types.Message):
         await message.answer('В этом чате уже есть игра')
         return
     
-    await message.answer('Запустил!\n/join')
+    await message.answer(f'Запустил!\n/{Commands.JOIN} - войти')

@@ -1,5 +1,7 @@
 @echo off
 
+@rem git pull
+
 cd /d "%~dp0"
 
 IF NOT EXIST "venv" (

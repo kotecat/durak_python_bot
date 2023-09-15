@@ -18,7 +18,7 @@ async def start_handler(message: types.Message):
     try:
         game = gm.get_game_from_chat(chat)
     except NoGameInChatError:
-        await message.answer('В этом чате нет игры!!\nСоздайте её при помощи - /new')
+        await message.answer(f'В этом чате нет игры!!\nСоздайте её при помощи - /{Commands.NEW}')
         return
     
     if not (await user_is_creator_or_admin(user, game, chat)):
@@ -30,7 +30,7 @@ async def start_handler(message: types.Message):
     except GameStartedError:
         await message.answer('Игра уже запущена!')
     except NotEnoughPlayersError:
-        await message.answer('Недостаточно игроков!\nЗайти в игру - /join')
+        await message.answer(f'Недостаточно игроков!\nЗайти в игру - /{Commands.JOIN}')
     
     else:
         await message.answer(f'Игра началась!\n\nКозырь - {game.deck.trump_ico}')

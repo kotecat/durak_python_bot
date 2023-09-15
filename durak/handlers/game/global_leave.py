@@ -19,7 +19,7 @@ async def leave_handler(message: types.Message):
     mention = user.get_mention(as_html=True)
 
     try:
-        # kick player
+        # kick player (leave)
         await a.do_leave_player(player)
     except NotEnoughPlayersError:
         gm.end_game(game.chat)
