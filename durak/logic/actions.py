@@ -16,31 +16,36 @@ async def do_turn(game: Game, skip_def: bool = False):
         if pl.cards:
             continue
         # Win ▼
-        if not game.winner:
-            # First
-            # satistic
-            with session as s:
-                user = pl.user
-                us = UserSetting.get(id=user.id)
-                if not us:
-                    us = UserSetting(id=user.id)
+        if not game.is_final:
+            if not game.winner:
+                # First
+                # satistic
+                with session as s:
+                    user = pl.user
+                    us = UserSetting.get(id=user.id)
+                    if not us:
+                        us = UserSetting(id=user.id)
 
-                if us.stats:
-                    us.first_places += 1  # first winner
-                
-            game.winner = pl
-            await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Первый победитель!')
-        else:    
-            await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Побеждает!')
+                    if us.stats:
+                        us.first_places += 1  # first winner
+                    
+                game.winner = pl
+                await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Первый победитель!')
+            else:    
+                await bot.send_message(chat.id, f'({pl.user.get_mention(as_html=True)}) - Побеждает!')
 
-        try:
-            await do_leave_player(pl)
-        except NotEnoughPlayersError:
+            try:
+                await do_leave_player(pl)
+            except NotEnoughPlayersError:
+                gm.end_game(game.chat)
+
+            try:
+                game = gm.get_game_from_chat(chat)
+            except NoGameInChatError:
+                await bot.send_message(chat.id, 'Игра завершена!')
+        else:
             gm.end_game(game.chat)
-
-        try:
-            game = gm.get_game_from_chat(chat)
-        except NoGameInChatError:
+            await bot.send_message(chat.id, "Произошла ничья :>")
             await bot.send_message(chat.id, 'Игра завершена!')
 
     
@@ -123,7 +128,7 @@ async def do_attack_card(player: Player, card: Card):
         # play last card in a game
         if len(game.players) <= 2:
             if (not player.cards) and (not game.deck.cards):
-                await do_turn(game)  # -> end game
+                game.is_final = True
 
             
 async def do_defence_card(player: Player, atk_card: Card, def_card: Card):

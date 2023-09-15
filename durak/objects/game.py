@@ -28,6 +28,7 @@ class Game:
         self.attacker_index: int = 0
         self.winner: Player | None = None
         self.is_pass: bool = False  # Atack player is PASS
+        self.is_final: bool = False
 
         self.COUNT_CARDS_IN_START: int = Config.COUNT_CARDS_IN_START
         self.MAX_PLAYERS: int = Config.MAX_PLAYERS
