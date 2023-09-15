@@ -33,6 +33,7 @@ class Commands:
     KICK: str = 'kick'
     KILL: str = 'kill'
     HELP: str = 'help'
+    START_BOT: str = 'start'
     STATS: str = 'stats'
     OFF_STATS: str = 'off_stats'
     ON_STATS: str = 'on_stats'

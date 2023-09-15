@@ -1,21 +1,21 @@
 from enum import Enum
 
 
-class Suits(Enum):
+class Suits(Enum, str):
     DIAMOND: str = 'd'
     HEART: str = 'h'
     CLUB: str = 'c'
     SPADE: str = 's'
 
 
-class SuitsIcons(Enum):
+class SuitsIcons(Enum, str):
     DIAMOND: str = '♦'
     HEART: str = '♥'
     CLUB: str = '♣'
     SPADE: str = '♠'
 
 
-class Values(Enum):
+class Values(Enum, str):
     SIX: str = '6'
     SEVEN: str = '7'
     EIGHT: str = '8'

@@ -3,7 +3,7 @@ from textwrap import dedent
 from loader import bot, dp, Commands
 
 
-@dp.message_handler(commands=[Commands.HELP])
+@dp.message_handler(commands=[Commands.HELP, Commands.START_BOT])
 async def help_handler(message: types.Message):
     help = dedent(f"""<b>Следуйте этим шагам:</b>
 1. Добавьте этого бота в группу
