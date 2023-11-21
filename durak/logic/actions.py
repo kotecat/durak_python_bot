@@ -1,6 +1,6 @@
-from objects import *
+from ..objects import *
 from loader import gm
-from db import UserSetting, session
+from ..db import UserSetting, session
 from aiogram import types, Bot
 
 

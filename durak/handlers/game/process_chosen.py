@@ -1,8 +1,8 @@
 from aiogram import types
 
 from loader import bot, dp, gm, CHOISE
-from objects import *
-from logic import actions
+from durak.objects import *
+from durak.logic import actions
 
 
 async def send_cheat_att(player: Player):

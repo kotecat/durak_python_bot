@@ -1,7 +1,7 @@
 from aiogram import types
 from loader import bot, dp, gm, CHOISE, Commands
-from objects import *
-from logic.utils import (
+from durak.objects import *
+from durak.logic.utils import (
     user_is_admin,
     user_is_creator,
     user_is_bot_admin,

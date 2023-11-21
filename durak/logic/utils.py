@@ -1,4 +1,4 @@
-from objects import Game
+from ..objects import Game
 from aiogram.types import User, Chat
 from aiogram import Bot
 from config import Config

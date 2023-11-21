@@ -1,6 +1,6 @@
-from logic.game_manager import GameManager
+from durak.logic.game_manager import GameManager
 from config import Config, COMMANDS, Commands
-from db.database import db
+from durak.db.database import db
 import os
 from aiogram import types, Bot, Dispatcher
 from aiogram.utils.exceptions import BadRequest

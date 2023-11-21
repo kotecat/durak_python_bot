@@ -1,6 +1,6 @@
 from aiogram import types
 from loader import bot, dp, gm, Config, Commands
-from objects import *
+from durak.objects import *
 
 
 @dp.message_handler(commands=[Commands.JOIN], chat_type=['group', 'supergroup'])

@@ -1,7 +1,7 @@
 from aiogram import types
 from loader import bot, dp, gm
-import logic.actions as a
-from objects import *
+import durak.logic.actions as a
+from durak.objects import *
 
 
 @dp.message_handler(content_types=[types.ContentTypes.LEFT_CHAT_MEMBER], chat_type=['group', 'supergroup'])

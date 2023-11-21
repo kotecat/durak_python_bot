@@ -1,5 +1,5 @@
-from objects import *
-from db import UserSetting, session
+from ..objects import *
+from ..db import UserSetting, session
 
 from aiogram import types, Bot
 from typing import Dict, List, Union

@@ -2,8 +2,8 @@ from aiogram import types
 from typing import List
 
 from loader import bot, dp, gm, CHOISE
-from objects import *
-from logic import result as r
+from durak.objects import *
+from durak.logic import result as r
 
 
 @dp.inline_handler()

@@ -1,7 +1,7 @@
 from aiogram import types
 from loader import bot, dp, gm, Commands
-import logic.actions as a
-from objects import *
+import durak.logic.actions as a
+from durak.objects import *
 
 
 @dp.message_handler(commands=[Commands.GLEAVE], chat_type=['group', 'supergroup'])

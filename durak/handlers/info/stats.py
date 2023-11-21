@@ -1,5 +1,5 @@
 from aiogram import types
-from db import UserSetting, session
+from durak.db import UserSetting, session
 from loader import bot, dp, Commands
 
 

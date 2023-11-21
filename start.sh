@@ -14,4 +14,4 @@ echo "running..."
 
 . venv/bin/activate
 
-python3 durak/bot.py
+python3 bot.py

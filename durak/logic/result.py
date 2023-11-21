@@ -7,7 +7,7 @@ from typing import List
 from uuid import uuid4
 from config import Commands
 
-from objects import Player, Game, Card, card as c
+from ..objects import Player, Game, Card, card as c
 
 
 def add_no_game(results: List[InlineQueryResult]):
